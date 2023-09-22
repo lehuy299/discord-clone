@@ -1,8 +1,54 @@
 "use client";
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogDescription, 
+  DialogHeader, 
+  DialogFooter,
+  DialogTitle
+} from "@/components/ui/dialog";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+const formSchema = z.object({
+  name: z.string().min(1, {
+    message: "Server name is required"
+  }),
+  imageUrl: z.string().min(1, {
+    message: "Server name is required"
+  }),
+});
+
 
 const InitialModal = () => {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      imageUrl: ""
+    }
+  });
+
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit =async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    
+  };
+
   return (
     <Dialog open>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
