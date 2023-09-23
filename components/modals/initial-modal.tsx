@@ -7,10 +7,11 @@ import {
   Dialog, 
   DialogContent, 
   DialogDescription, 
-  DialogFooter,
   DialogHeader, 
-  DialogTitle 
+  DialogFooter,
+  DialogTitle
 } from "@/components/ui/dialog";
+
 import {
   Form,
   FormControl,
@@ -24,15 +25,17 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Server name is required."
+    message: "Server name is required"
   }),
   imageUrl: z.string().min(1, {
-    message: "Server name is required."
-  })
-})
+    message: "Server name is required"
+  }),
+});
+
 
 const InitialModal = () => {
   const form = useForm({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       imageUrl: ""
@@ -95,4 +98,4 @@ const InitialModal = () => {
   )
 }
 
-export default InitialModal
+export default InitialModal;
