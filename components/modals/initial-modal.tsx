@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -34,6 +35,7 @@ const formSchema = z.object({
 
 
 const InitialModal = () => {
+  const [isMount, setIsMount] = useState(false);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,7 +73,7 @@ const InitialModal = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
+                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
                       Server name
                     </FormLabel>
                     <FormControl>
@@ -82,12 +84,13 @@ const InitialModal = () => {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button disabled={isLoading}>
+              <Button variant="primary" disabled={isLoading}>
                 Create
               </Button>
             </DialogFooter>
