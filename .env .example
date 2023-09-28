@@ -12,7 +12,6 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 # Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
 # See the documentation for all the connection string options: https://pris.ly/d/connection-strings
 
-DATABASE_URL='mysql://c3r0zi991u9gz6ptj10a:pscale_pw_fIt1wlVUchJh5oZTtDB7f4DSfcq1D7HsXFXh8fnITHb@aws.connect.psdb.cloud/discord-tutorial?sslaccept=strict'
-
+DATABASE_URL='mysql://p1w56uodk1u3mcmngfk7:pscale_pw_7YlWFEnvjadZ8CA7vW6euuw70nDuri3qGOW1WjG827U@aws.connect.psdb.cloud/discord-tutorial?sslaccept=strict'
 UPLOADTHING_SECRET=sk_live_a3fba962f023c670e380c2654310b8ebb3c2160a0e2422e41873dd43cc7f9a03
 UPLOADTHING_APP_ID=0m6yfikibe

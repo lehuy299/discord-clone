@@ -1,5 +1,7 @@
 "use client";
 
+import { UploadDropzone } from "@/lib/uploadthing";
+
 interface FileUploadProps {
   onChange: (url?: string) => void,
   value: string,
@@ -12,9 +14,15 @@ const FileUpload = ({
   endpoint
 }: FileUploadProps) => {
   return (
-    <div>
-      File Upload Component
-    </div>
+    <UploadDropzone
+      endpoint={endpoint}
+      onClientUploadComplete={(res) => {
+        onChange(res?.[0].fileUrl)
+      }}
+      onUploadError={(error: Error) => {
+        console.log(error);
+      }}
+    />
   );
 }
 
