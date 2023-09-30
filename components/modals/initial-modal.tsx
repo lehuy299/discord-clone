@@ -84,7 +84,7 @@ const InitialModal = () => {
                       <FormControl>
                         <FileUpload 
                           onChange={field.onChange}
-                          value="imageUrl"
+                          value={field.value}
                           endpoint="serverImage"
                         />
                       </FormControl>
