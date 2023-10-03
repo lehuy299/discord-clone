@@ -44,9 +44,6 @@ const FileUpload = ({
       onUploadError={(error: Error) => {
         console.log(error);
       }}
-      appearance={{
-        button: "text-black"
-      }}
     />
   );
 }
