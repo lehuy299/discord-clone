@@ -790,25 +790,23 @@
     "@typescript-eslint/types" "6.6.0"
     eslint-visitor-keys "^3.4.1"
 
-"@uploadthing/mime-types@^0.2.1":
+"@uploadthing/mime-types@^0.2.0":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@uploadthing/mime-types/-/mime-types-0.2.1.tgz#ee9daf91e30943a324d31f21a4b5ee9c7cd1076d"
   integrity sha512-UDySsPbdi7wp52WG7mp5CiZwaTvokDubqhm1xhFm73Bqhp0PsGbwSSF5PdCXH4fe8Y4EKGrMyWQ4i1fF9+DVVQ==
 
-"@uploadthing/react@^5.6.1":
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/@uploadthing/react/-/react-5.6.1.tgz#04f08a24e96b678ea2dc1622ab054f511ba2efc8"
-  integrity sha512-uVd4I26OudpUcikobDFBMl9mG0vlhdXmK57oidCIrvfgNfKZOehpW+pqe1nUWE8HoYquJ1iK4OrmrfX8hOK2MA==
+"@uploadthing/react@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@uploadthing/react/-/react-5.3.0.tgz#80820827d7742a1fa65f3e9b9db55804f32506f5"
+  integrity sha512-B/LowwhOgcU/VBdxueF6dzHFoXNt4oLKDp6GOjMpHATHzWQ+eOlWM32f7NOpgQ0i5/vJPpilZ46OazccnEam6g==
   dependencies:
-    "@uploadthing/shared" "^5.2.2"
-    attr-accept "^2.2.2"
-    file-selector "^0.6.0"
+    "@uploadthing/shared" "^5.2.0"
     tailwind-merge "^1.13.2"
 
-"@uploadthing/shared@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@uploadthing/shared/-/shared-5.2.2.tgz#32a8c68af699cf73a09ede193a32cc0dedf17d2a"
-  integrity sha512-OxNXcL91BSyKhZ+j0N5ekFRpCTwWsAf8B1FzL1YePTrNhMA0ZdlYqsObMAr7/jeWTc/mGaRRV1zUL4HBevnE3Q==
+"@uploadthing/shared@^5.2.0":
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@uploadthing/shared/-/shared-5.2.3.tgz#c15810bf874aa2302dc693c22a2595757d0f4ad2"
+  integrity sha512-45GEYfiP7ziLHtE3Tbb+X5FayNOgTstPIxNydbo9D33ZOWtqJknA9KNaSB8JpuEONGVbXjAfNNYkOUVXwb8dAQ==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -2694,6 +2692,15 @@ react-dom@18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-dropzone@^14.2.3:
+  version "14.2.3"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.2.3.tgz#0acab68308fda2d54d1273a1e626264e13d4e84b"
+  integrity sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==
+  dependencies:
+    attr-accept "^2.2.2"
+    file-selector "^0.6.0"
+    prop-types "^15.8.1"
+
 react-hook-form@^7.46.1:
   version "7.46.1"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.46.1.tgz#39347dbff19d980cb41087ac32a57abdc6045bb3"
@@ -3219,13 +3226,13 @@ update-browserslist-db@^1.0.11:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
-uploadthing@^5.6.1:
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/uploadthing/-/uploadthing-5.6.1.tgz#3fb29dd3c12bc45885f17b274e5af17472808c19"
-  integrity sha512-lWVMCoAmZ33mahV6NS7oW+eQl++jnYEuaR3zh9PlrEt6P8lkl3GPDUE5iWywBx+pK9HewIqZvaZXQvzKOjOlMg==
+uploadthing@5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/uploadthing/-/uploadthing-5.3.3.tgz#ea384b2abb2985aa8fea1fee718375bb27c09f53"
+  integrity sha512-tYg44gX7+4Tf5UBZTS0Cjx44l6DBI4kaPdFDH2jUuxDp1CyTxUBUaFNvsA1AqhxQsxi3ZR+pGD917tn6kbPp/w==
   dependencies:
-    "@uploadthing/mime-types" "^0.2.1"
-    "@uploadthing/shared" "^5.2.2"
+    "@uploadthing/mime-types" "^0.2.0"
+    "@uploadthing/shared" "^5.2.0"
 
 uri-js@^4.2.2:
   version "4.4.1"
