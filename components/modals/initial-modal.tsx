@@ -60,7 +60,6 @@ const InitialModal = () => {
       form.reset();
       router.refresh();
       window.location.reload();
-      useRouter
     } catch (error) {
       console.log(error);
     }
