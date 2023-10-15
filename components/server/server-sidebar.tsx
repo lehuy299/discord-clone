@@ -3,14 +3,15 @@ import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { ChannelType } from "@prisma/client";
 import { redirect } from "next/navigation";
+import { ServerHeader } from "./server-header";
 
-interface ServerSidebar {
+interface ServerSidebarProps {
   serverId: string
 }
 
 export const ServerSidebar = async({
   serverId
-}: ServerSidebar) => {
+}: ServerSidebarProps) => {
   const profile = await currentProfile();
   if (!profile) {
     return redirectToSignIn();
@@ -36,7 +37,8 @@ export const ServerSidebar = async({
       }
     }
   })
-
+  console.log('server',server?.members);
+  
   const textChannels = server?.channels.filter((channel) => channel.type === ChannelType.TEXT)
   const audioChannels = server?.channels.filter((channel) => channel.type === ChannelType.AUDIO)
   const videoChannels = server?.channels.filter((channel) => channel.type === ChannelType.VIDEO)
@@ -49,8 +51,11 @@ export const ServerSidebar = async({
   const role = server.members.find((member) => member.profileId === profile.id)?.role;
 
   return (
-    <div className="flex flex-col h-full">
-      Server Sidebar Component
+    <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
+      <ServerHeader 
+        server={server}
+        role={role}
+      />
     </div>
   )
 }

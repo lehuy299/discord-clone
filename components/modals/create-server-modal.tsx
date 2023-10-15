@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import FileUpload from "../file-upload";
+import FileUpload from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
