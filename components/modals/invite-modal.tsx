@@ -18,12 +18,16 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Copy, RefreshCcw, RefreshCw } from "lucide-react";
+import { useOrigin } from "@/hooks/use-origin";
 
 const InviteModal = () => {
-  const { isOpen, onClose, type } = useModal();
-  const router = useRouter();
+  const { isOpen, onClose, type, data } = useModal();
+  const origin = useOrigin();
+
+  const { server } = data;
 
   const isModalOpen = isOpen && type === "invite";
+  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -39,7 +43,7 @@ const InviteModal = () => {
           </Label>
           <div className="flex items-center gap-x-2 mt-2">
             <Input 
-              value='invite-link'
+              value={inviteUrl}
               className="bg-zinc-300/50 text-black border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             <Button size='icon'>
@@ -52,7 +56,7 @@ const InviteModal = () => {
             className="text-xs text-zinc-500 mt-4"
           >
             Generate a new link
-            <RefreshCw className="w-4 h-4 ml-4"/>
+            <RefreshCw className="w-4 h-4 ml-2"/>
           </Button>
         </div>
       </DialogContent>
