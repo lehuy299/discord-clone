@@ -37,7 +37,6 @@ export const ServerSidebar = async({
       }
     }
   })
-  console.log('server',server?.members);
   
   const textChannels = server?.channels.filter((channel) => channel.type === ChannelType.TEXT)
   const audioChannels = server?.channels.filter((channel) => channel.type === ChannelType.AUDIO)
