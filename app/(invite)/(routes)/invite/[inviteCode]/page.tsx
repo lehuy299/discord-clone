@@ -23,7 +23,7 @@ const InviteCodePage = async ({params}: InviteCodePageProps) => {
       inviteCode: params.inviteCode,
       members: {
         some: {
-          profileId: profile.id
+          profileId: profile!.id
         }
       }
     }
@@ -40,15 +40,17 @@ const InviteCodePage = async ({params}: InviteCodePageProps) => {
     data: {
       members: {
         create: [
-          { profileId: profile.id }
+          { profileId: profile!.id }
         ]
       }
     }
   });
 
-  return ( 
-    <div>InviteCodePage</div>
-  );
+  if (server) {
+    redirect(`/servers/${server.id}`)
+  }
+
+  return null;
 }
  
 export default InviteCodePage;
