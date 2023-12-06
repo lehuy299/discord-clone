@@ -12,7 +12,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import { ServerWithMembersWithProfiles } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "../user-avatar";
-import { MoreVertical, ShieldAlert, ShieldCheck } from "lucide-react";
+import { MoreVertical, ShieldAlert, ShieldCheck, ShieldQuestion } from "lucide-react";
 import { useState } from "react";
 import { DropdownMenu, 
   DropdownMenuContent,
@@ -67,21 +67,16 @@ const InviteModal = () => {
                     <DropdownMenuTrigger asChild>
                       <MoreVertical className="w-4 h-4 text-zinc-500"/>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="left" className="w-56">
+                    <DropdownMenuContent side="left">
                       <DropdownMenuSub>
                         <DropdownMenuSubTrigger>
-                          <span>Invite users</span>
+                          <ShieldQuestion className="w-4 h-4 mr-2" />
+                          <span>Role</span>
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
                           <DropdownMenuSubContent>
                             <DropdownMenuItem>
-                              <span>Email</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <span>Message</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <span>More...</span>
+                              <span>Guest</span>
                             </DropdownMenuItem>
                           </DropdownMenuSubContent>
                         </DropdownMenuPortal>
