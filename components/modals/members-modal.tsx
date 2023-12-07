@@ -61,7 +61,7 @@ const InviteModal = () => {
                   {member.profile.email}
                 </p>
               </div>
-              {member.id !== server.profileId && (
+              {member.profileId !== server.profileId && (
                 <div className="ml-auto">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
