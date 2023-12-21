@@ -12,16 +12,19 @@ import { useModal } from "@/hooks/use-modal-store";
 import { ServerWithMembersWithProfiles } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "../user-avatar";
-import { MoreVertical, ShieldAlert, ShieldCheck, ShieldQuestion } from "lucide-react";
+import { Check, Gavel, Loader2, MoreVertical, Shield, ShieldAlert, ShieldCheck, ShieldQuestion } from "lucide-react";
 import { useState } from "react";
-import { DropdownMenu, 
+import {
+  DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem, 
-  DropdownMenuPortal, 
-  DropdownMenuSub, 
-  DropdownMenuSubContent, 
-  DropdownMenuSubTrigger, 
-  DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+  DropdownMenuItem,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 
 const InviteModal = () => {
@@ -61,30 +64,46 @@ const InviteModal = () => {
                   {member.profile.email}
                 </p>
               </div>
-              {member.profileId !== server.profileId && (
-                <div className="ml-auto">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <MoreVertical className="w-4 h-4 text-zinc-500"/>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="left">
-                      <DropdownMenuSub>
-                        <DropdownMenuSubTrigger>
-                          <ShieldQuestion className="w-4 h-4 mr-2" />
-                          <span>Role</span>
-                        </DropdownMenuSubTrigger>
-                        <DropdownMenuPortal>
-                          <DropdownMenuSubContent>
-                            <DropdownMenuItem>
-                              <span>Guest</span>
-                            </DropdownMenuItem>
-                          </DropdownMenuSubContent>
-                        </DropdownMenuPortal>
-                      </DropdownMenuSub>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              )}
+              {member.profileId !== server.profileId &&
+                member.profileId !== loadingId && (
+                  <div className="ml-auto">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <MoreVertical className="w-4 h-4 text-zinc-500" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent side="left">
+                        <DropdownMenuSub>
+                          <DropdownMenuSubTrigger>
+                            <ShieldQuestion className="w-4 h-4 mr-2" />
+                            <span>Role</span>
+                          </DropdownMenuSubTrigger>
+                          <DropdownMenuPortal>
+                            <DropdownMenuSubContent>
+                              <DropdownMenuItem>
+                                <Shield className="w-4 h-4 mr-2" />
+                                <span>Guest</span>
+                                {member.role === "GUEST" && <Check className="w-4 h-4 ml-auto" />}
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <ShieldCheck className="w-4 h-4 mr-2" />
+                                <span>Moderator</span>
+                                {member.role === "MODERATOR" && <Check className="w-4 h-4 ml-auto" />}
+                              </DropdownMenuItem>
+                            </DropdownMenuSubContent>
+                          </DropdownMenuPortal>
+                        </DropdownMenuSub>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          <Gavel className="w-4 h-4 mr-2" />
+                          Kick
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                )}
+                {member.profileId === loadingId && (
+                  <Loader2 className="animate-spin text-zinc-500 w-4 h-4 ml-auto" />
+                )}
             </div>
           ))}
         </ScrollArea>
