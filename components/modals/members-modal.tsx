@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
-
+import qs from 'query-string';
 import { useModal } from "@/hooks/use-modal-store";
 import { ServerWithMembersWithProfiles } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -26,6 +26,8 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const InviteModal = () => {
   const roleIconMap = {
@@ -33,13 +35,54 @@ const InviteModal = () => {
     MODERATOR: <ShieldAlert className="w-4 h-4 text-rose-500" />,
     GUEST: null
   }
+  const router = useRouter();
   const { onOpen, isOpen, onClose, type, data } = useModal();
-  const [loadingId, setLoadingId] = useState();
+  const [loadingId, setLoadingId] = useState("");
 
   const { server } = data as { server: ServerWithMembersWithProfiles };
 
   const isModalOpen = isOpen && type === "members";
 
+  const onRoleChange = async (memberId: string, role: string) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id
+        }
+      });
+      const response = await axios.patch(url, { role });
+
+      router.refresh();
+      onOpen("members", { server: response.data });
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoadingId("");
+    }
+  };
+
+  const onKick = async (memberId: string) => {
+    try {
+      setLoadingId(memberId);
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id
+        }
+      });
+      const response = await axios.delete(url);
+
+      router.refresh();
+      onOpen("members", { server: response.data });
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoadingId("");
+    }
+  };
+  
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black overflow-hidden">
@@ -53,7 +96,7 @@ const InviteModal = () => {
         </DialogHeader>
         <ScrollArea>
           {server?.members?.map(member => (
-            <div className="flex items-center gap-x-2 mb-6">
+            <div key={member.id} className="flex items-center gap-x-2 mb-6">
               <UserAvatar imageUrl={member.profile.imageUrl} />
               <div>
                 <div className="flex gap-x-1 text-xs font-semibold">
@@ -65,7 +108,7 @@ const InviteModal = () => {
                 </p>
               </div>
               {member.profileId !== server.profileId &&
-                member.profileId !== loadingId && (
+                member.id !== loadingId && (
                   <div className="ml-auto">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -79,12 +122,16 @@ const InviteModal = () => {
                           </DropdownMenuSubTrigger>
                           <DropdownMenuPortal>
                             <DropdownMenuSubContent>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => member.role !== "GUEST" && onRoleChange(member.id, "GUEST")}
+                              >
                                 <Shield className="w-4 h-4 mr-2" />
                                 <span>Guest</span>
                                 {member.role === "GUEST" && <Check className="w-4 h-4 ml-auto" />}
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => member.role !== "MODERATOR" &&  onRoleChange(member.id, "MODERATOR")}
+                              >
                                 <ShieldCheck className="w-4 h-4 mr-2" />
                                 <span>Moderator</span>
                                 {member.role === "MODERATOR" && <Check className="w-4 h-4 ml-auto" />}
@@ -93,7 +140,9 @@ const InviteModal = () => {
                           </DropdownMenuPortal>
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => onKick(member.id)}
+                        >
                           <Gavel className="w-4 h-4 mr-2" />
                           Kick
                         </DropdownMenuItem>
@@ -101,7 +150,7 @@ const InviteModal = () => {
                     </DropdownMenu>
                   </div>
                 )}
-                {member.profileId === loadingId && (
+                {member.id === loadingId && (
                   <Loader2 className="animate-spin text-zinc-500 w-4 h-4 ml-auto" />
                 )}
             </div>
